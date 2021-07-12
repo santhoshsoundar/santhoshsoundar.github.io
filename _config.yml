@@ -1,0 +1,31 @@
+# top level stuff you probably don't need to touch
+highlighter: rouge
+markdown: kramdown
+rdiscount:
+  extensions: [smart]
+permalink: /:title.html
+paginate: 5
+gems: [jekyll-paginate]
+port: 3000
+safe: true
+
+
+
+# edit here to achieve your personal greatness
+url: http://santhosh114.github.io/
+baseurl:
+title: DataViz Blog
+author: Santhosh
+description: my personal blog and resume
+email: santhosh.fiddle@gmail.com
+github: santhosh114 # username
+twitter: Santhosh7114
+linkedin: Santhosh Soundararajan
+stackoverflow: users/5743716/santhosh-soundararajan  #e.g: users/2735833/proton1h1
+#Comment out if you don't want disqus 
+disqus: username
+google_analytics: UA-69391421-1
+
+
+# needed for travis-ci build
+exclude: [vendor]

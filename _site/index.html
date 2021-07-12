@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta name="author" content="Santhosh" />
+    <meta name="description" content="my personal blog and resume">
+    <link rel="favicon" href="static/img/favicon.ico">
+
+<link rel="apple-touch-icon" sizes="57x57" href="static/img/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="static/img/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="static/img/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="static/img/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="static/img/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="static/img/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="static/img/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="static/img/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="static/img/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="static/img/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="static/img/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="static/img/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+    
+      <title>DataViz Blog</title>
+    
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+    crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/syntax.css" />
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,500,300,100' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    <!-- Google Analytics -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69391421-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <!-- Main Body-->
+  <body>
+  <!-- Wrap all page content here -->
+  <div id="wrap">
+    <!-- Navbar header -->
+    <style>
+.announce {
+  padding: 15px 0;
+  display: block;
+  color: rgba(0, 0, 0, 0.8) !important;
+  line-height: inherit;
+  background: linear-gradient(to bottom, #ffc, #ffa);
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.column {
+  max-width: 960px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+</style>
+
+<a class='announce' href="https://santhoshsoundar.blog" target="blank">
+  <div class='column'>This is an older version my blog, now a react based gatsby blog - <b>santhoshsoundar.blog</b></div>
+</a>
+<nav class="navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html"><h1><i class="fa fa-home"></i>santhosh<span>fiddle</span></h1></a>
+
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="https://github.com/Santhosh114">Projects</a></li>
+        <li><a href="https://www.linkedin.com/in/santhoshsoundararajan">Resume</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>         
+
+    <style>
+.highlighted {
+    background-color: rgba(255,255,255,.7);
+}
+hr.style14 { 
+  border: 0; 
+  height: 0.5px; 
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #a5a5a5, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #a5a5a5, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #a5a5a5, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #a5a5a5, #f0f0f0); 
+}
+</style>
+
+
+<section id="about">
+
+	
+	<div class="container">
+
+	  
+	  <div id="chart"></div>
+	  <style>@import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900,300italic);</style>
+      <style>@import url(https://fonts.googleapis.com/css?family=Play:700,900);</style>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="bubble/smallscript.js"></script>
+
+
+<div class="sandy_intro">
+	  <h3>Hi, I'm <strong>Santhosh</strong>, master of data science from <a href="https://www.soic.indiana.edu/graduate/degrees/data-science/courses/index.html">IndianaUniversity.</a></h3>
+	  <h3>Analytics being my trade, I constantly visualize data to uncover patterns. </h3>
+	  <h3>This is my musings in Data Science, Statistics & Interactive Visualizations.</h3>
+	  <h3>For more check out my academic &amp; professional <a href="https://www.linkedin.com/in/santhoshsoundararajan">LinkedIn-Resume</a>.</h3>
+	  <h3>Contact me at <a href="http://twitter.com/Santhosh7114">@Santhosh7114</a> or by <a href="mailto:santhosh.fiddle@gmail.com">email</a>.
+</h3>
+</div>
+
+<hr class="style14">
+<h4> 
+	<small><a href="https://www.edwardtufte.com/tufte/">"Only a picture can carry such a volume of data in such as small space." </br></a><small>
+     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 
+	 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;- Edward Tufte
+    </h4>
+
+
+<div id="demo_block">
+<!--row 2.0-->
+	<div class="row blog_post">
+				 
+
+     <div class="col-sm-4 demo_item">
+                     	<div class="border_01">
+				<div class="row row_demo">
+				<div class="col-xs-12 post_title">
+				 	
+					 <h6 class="highlighted">
+							<a style="color: #000000" href="http://serene-temple-42286.herokuapp.com/">SF Muni Transit Map - D3+Angular</a>
+					 </h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/sfmuni.png" alt="Responsive image">
+                 </div>
+				</div>    </div>
+    </div>
+
+			<div class="col-sm-4 demo_item">
+				<div class="border_01">
+				 	<div class="row row_demo">
+				 <div class="col-xs-12 post_title">
+				 	
+					<h6 class="highlighted">
+					 	<a style="color: #000000" href="equinixChallenge.html">Equinix DataViz Challenge</a>
+					 	
+					 </h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/magneto.png" alt="Responsive image">
+                 </div>
+				</div>
+			</div>                              				 
+			</div>  
+
+<div class="col-sm-4 demo_item">
+		
+<div class="border_01">
+		<div class="row row_demo">
+
+				 <div class="col-xs-12 post_title"> 
+				 	
+					 <h6 class="highlighted">
+					 	<a style="color: #000000" href="parallel.html">Parallel Coordinates - The Rockstar InfoViz</a>
+					 </h6> 
+
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/parellelCoorditanes/para.png" alt="Responsive image">
+                 </div>
+				</div>	 </div> 
+     </div>
+        
+
+		</div>
+<!--end row 2.0-->
+
+
+<!--row 2.0-->
+<div class="row blog_post">
+				 
+
+	<div class="col-sm-4 demo_item">
+						<div class="border_01">
+			   <div class="row row_demo">
+			   <div class="col-xs-12 post_title">
+					
+					<h6 class="highlighted">
+							<a style="color: #000000" href="expdashboard.html">Expenditure Dashboard</a>
+						
+					</h6>  
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-12">
+
+						   
+						  <img class="post-cover" src="../static/img/blog/crossfilter/cross.png" alt="Responsive image">
+						  
+				</div>
+			   </div>    </div>
+   </div>
+
+		   <div class="col-sm-4 demo_item">
+			   <div class="border_01">
+					<div class="row row_demo">
+				<div class="col-xs-12 post_title">
+					
+				   <h6 class="highlighted">
+						<a style="color: #000000" href="chernoff.html">Chernoff Faces - D3.js</a>
+						
+					</h6>  
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-12">
+
+						   
+						  <img class="post-cover" src="../static/img/blog/chernoff/chern.png" alt="Responsive image">
+				</div>
+			   </div>
+		   </div>                              				 
+		   </div>  
+
+<div class="col-sm-4 demo_item">
+	   
+<div class="border_01">
+	   <div class="row row_demo">
+
+				<div class="col-xs-12 post_title"> 
+					
+					<!-- <h6 class="highlighted">
+						<a style="color: #000000" href="parallel.html">Parallel Coordinates - The Rockstar InfoViz</a>
+					</h6>  -->
+
+					<h6 class="highlighted">
+						<a style="color: #000000" href="airport.html">Interactive US Airport Evolution (responsive)</a>
+					</h6>  
+
+				</div>
+				<div class="col-sm-12 col-md-12 col-lg-12">
+
+						  <!--  
+						  <img class="post-cover" src="../static/img/blog/parellelCoorditanes/para.png" alt="Responsive image"> -->
+
+						   
+                           <img class="post-cover" src="../static/img/blog/demoboy/yydemo.png" alt="Responsive image">
+				</div>
+			   </div>	 </div> 
+	</div>
+	   
+
+	   </div>
+<!--end row 2.0-->
+
+<!--row 1-->
+<div class="row blog_post">
+				 
+
+     <div class="col-sm-4 demo_item">
+                     	<div class="border_01">
+				<div class="row row_demo">
+				<div class="col-xs-12 post_title">
+				 	
+					 <!-- <h6 class="highlighted">
+					 	<a style="color: #000000" href="airport.html">Interactive US Airport Evolution (responsive)</a>
+					 </h6>   -->
+					 <h6 class="highlighted">
+						<a style="color: #000000" href="steve.html">Diceyness of Visual Perception</a>
+					</h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                           <!--  
+						   <img class="post-cover" src="../static/img/blog/demoboy/yydemo.png" alt="Responsive image"> -->
+						    
+                           <img class="post-cover" src="../static/img/blog/demoboy/steve.png" alt="Responsive image">
+                 </div>
+				</div>    </div>
+    </div>
+
+			<div class="col-sm-4 demo_item">
+				<div class="border_01">
+				 	<div class="row row_demo">
+				 <div class="col-xs-12 post_title">
+				 	
+					<h6 class="highlighted">
+					 	<a style="color: #000000" href="collegemajors.html">College Majors Salary Analysis - Plot.ly</a>
+					 	
+					 </h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/bubble.png" alt="Responsive image">
+                 </div>
+				</div>
+			</div>                              				 
+			</div>  
+
+<div class="col-sm-4 demo_item">
+		
+<div class="border_01">
+		<div class="row row_demo">
+
+				 <div class="col-xs-12 post_title"> 
+				 	
+					 <h6 class="highlighted">
+					 	<a style="color: #000000" href="bubbleMap.html">Time-Series Bubble Map (responsive)</a>
+					 </h6> 
+
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/yyblbdemo.png" alt="Responsive image">
+                 </div>
+				</div>	 </div> 
+     </div>
+        
+
+		</div>
+<!--end row 1-->
+
+
+
+<!--row new-->
+<div class="row blog_post">
+				 
+
+     <div class="col-sm-4 demo_item">
+            <div class="border_01">
+				<div class="row row_demo">
+				<div class="col-xs-12 post_title">
+				 	
+					 <h6 class="highlighted">
+					 	<a style="color: #000000" href="critique.html">Precinct-Level Choropleth Map</a>
+					 </h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/critique.png" alt="Responsive image">
+                 </div>
+				</div>    </div>
+       </div>
+
+			<div class="col-sm-4 demo_item">
+				<div class="border_01">
+				 	<div class="row row_demo">
+				 <div class="col-xs-12 post_title">
+				 	
+					<h6 class="highlighted">
+						 <!-- <a style="color: #000000" href="steve.html">Diceyness of Visual Perception</a> -->
+						 <a style="color: #000000" href="chloro.html">Interactive Choropleth Map - US</a>
+						 
+					 </h6>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+						   <!-- <img class="post-cover" src="../static/img/blog/demoboy/steve.png" alt="Responsive image"> -->
+						   <img class="post-cover" src="../static/img/blog/demoboy/choroDemo.png" alt="Responsive image">
+                 </div>
+				</div>
+			</div>                              				 
+			</div>  
+
+<div class="col-sm-4 demo_item">
+		
+<div class="border_01">
+		<div class="row row_demo">
+
+				 <div class="col-xs-12 post_title"> 
+				 	
+					 <h6 class="highlighted">
+					 	<a style="color: #000000" href="neo4j.html">Neo4j Graph Schema - Facebook Frnz</a>
+					 </h6> 
+
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/fbSchema.png" alt="Responsive image">
+                 </div>
+				</div>	 </div> 
+     </div>
+        
+
+		</div>
+<!--end row new1-->
+
+
+
+
+<!-- row 2-->
+			<!-- <div class="row blog_post">
+
+				<div class="col-sm-4 demo_item">
+		
+<div class="border_01">
+		<div class="row row_demo">
+
+				 <div class="col-xs-12 post_title"> 
+				 	
+					 <h6 class="highlighted">
+					 	<a style="color: #000000" href="cluster.html">Simple Force Layout</a>
+					 </h6> 
+
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/cluster.png" alt="Responsive image">
+                 </div>
+				</div>	 </div> 
+     </div>
+
+
+
+				 
+	         
+
+     <div class="col-sm-4 demo_item">
+                     	<div class="border_01">
+				<div class="row row_demo">
+				<div class="col-xs-12 post_title">
+				 	
+					 <!-- <h6 class="highlighted">
+					 	<a style="color: #000000" href="stream.html">Interactive Streamgraph</a>
+					 </h6>   -->
+					 <!-- <h6 class="highlighted">
+						<a style="color: #000000" href="neo4j.html">Neo4j Graph Schema - Facebook Frnz</a>
+					</h6> 
+				 </div>
+				 <div class="col-xs-12">
+
+                           <!--  
+						   <img class="post-cover" src="../static/img/blog/demoboy/streamHead.png" alt="Responsive image"> -->
+						   <!--  
+                           <img class="post-cover" src="../static/img/blog/demoboy/fbSchema.png" alt="Responsive image">
+                 </div>
+				</div>    </div>
+	</div> 
+	 -->
+
+			
+<!-- 			
+			<div class="col-sm-4 demo_item">
+				<div class="border_01">
+				 	<div class="row row_demo">
+				 <div class="col-xs-12 post_title">
+				 	
+					 <h6 class="highlighted">
+						 <a style="color: #000000" href="chloro.html">Interactive Choropleth Map - US</a>
+						 <img class="post-cover" src="../static/img/blog/demoboy/choroDemo.png" alt="Responsive image">
+					 </h6>  
+				 </div>
+				 <div class="col-xs-12">
+
+                            
+                           <img class="post-cover" src="../static/img/blog/demoboy/choroDemo.png" alt="Responsive image">
+
+                 </div>
+				</div>
+			</div>                              				 
+			</div>  </div> --> 
+
+	
+<!--end row 2 -->
+
+		</div>
+
+
+<h5> <a href="http://www.sealthreinhold.com/school/tuftes-rules/rule_one.php">Edward Tufte's Visual Design Rules!</a></h5>
+<hr class="style14">
+
+	  <div class="social" >
+	<h4>
+    
+	  <a href="http://github.com/santhosh114"><i class="fa fa-github"></i></a>
+    
+    
+	  <a href="mailto:santhosh.fiddle@gmail.com"><i class="fa fa-envelope"></i></a>
+    
+
+    
+	  <a href="http://twitter.com/Santhosh7114"><i class="fa fa-twitter"></i></a>
+    
+    
+	  <a href="http://linkedin.com/in/Santhosh Soundararajan"><i class="fa fa-linkedin"></i></a>
+    
+    
+	  <a href="http://stackoverflow.com/users/5743716/santhosh-soundararajan"><i class="fa fa-stack-overflow"></i></a>
+    
+	</h4>
+</div>
+
+	</div>
+</section>
+
+
+  </div>
+  <!-- Footer -->
+  <footer>
+    
+    <div id="footer">
+        
+        <div class="container">
+
+            <p class="text-muted">Powered by <a href="http://jekyllrb.com/">Jekyll</a> and
+            <a href="https://github.com/Santhosh114">GitHub</a> with ♥ Santhosh Soundararajan</p>
+            
+        </div>
+    </div>
+</footer>
+<div class="footer"></div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+    integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+    crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="static/js/docs.min.js"></script>
+    <script src="static/js/main.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="static/js/ie10-viewport-bug-workaround.js"></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75622536-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

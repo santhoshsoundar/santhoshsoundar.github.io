@@ -1,0 +1,1924 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  
+    <title type="text" xml:lang="en">DataViz Blog</title>
+    <link type="application/atom+xml" rel="self" href="http://santhosh114.github.io//atom.xml"/>
+  
+  <link href="http://santhosh114.github.io//"/>
+  <id>http://santhosh114.github.io//</id>
+  <updated>2018-11-15T09:19:01Z</updated>
+  <author>
+    <name>Santhosh</name>
+    <email>santhosh.fiddle@gmail.com</email>
+  </author>
+  <rights type="text">Copyright © 2018 Santhosh. All rights reserved.</rights>
+  
+  <entry>
+  <title type="text">Equinix Data Viz Challenge - Magneto</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//equinixChallenge.html" />
+  <id>http://santhosh114.github.io//equinixChallenge</id>
+  <published>2017-09-05T00:00:00Z</published>
+  <updated>2017-09-05T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>@import url(../equinix/css/magneto-style.css);</style>
+
+<style>@import url(../static/css/dc.min.css);</style>
+
+<div class="container" id="dashContain">
+	<div class="row">
+    <div class="col-md-6">
+      <!-- Nav tabs -->
+      <div class="card">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#composite" id="compositeLink" aria-controls="composite" role="tab" data-toggle="tab">Composite Dashboard</a></li>
+                    <li role="presentation"><a href="#customer" id="customerLink" aria-controls="customer" role="tab" data-toggle="tab">Customer Insights</a></li>
+                    <li role="presentation"><a href="#eda" id="edaLink" aria-controls="eda" role="tab" data-toggle="tab">Top 50 Customers</a></li>
+                    <li role="presentation"><a href="#sector" id="sectorLink" aria-controls="sector" role="tab" data-toggle="tab">Time Series - Avg Scores</a></li>
+                    <li role="presentation"><a href="#wrk" aria-controls="wrk" role="tab" data-toggle="tab">Workflow</a></li>
+                    <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">@Magneto</a></li>
+                </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="composite">
+                        <div class="container" id="composite-container">
+                            <div class="row">
+                                  <div id="score-line-chart">
+                                      <span class="chart-title">Magneto Score Components Over Time</span>
+                                      <a class="reset" href="javascript:functionScoreChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                  <div id="segment-row-chart">
+                                      <span class="chart-title">Customer Segment Frequency</span>
+                                      <p class="subText"> select segment to filter </p>
+                                      <a class="reset" href="javascript:functionSegmentChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                                  <div id="year-bar-chart">
+                                      <span class="chart-title">Annual Customer Distribution</span>
+                                      <p class="subText"> select year to filter </p>
+                                      <a class="reset" href="javascript:functionYearChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                                  <div id="market-pie-chart">
+                                    <span class="chart-title">Market Shares</span>
+                                    <p class="subText"> select market to filter </p>
+                                    <a class="reset" href="javascript:functionMarketChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                    <div class="clearfix"></div>
+                                  </div>  
+                            </div>
+                            <div class="row">
+                                  <div class="dc-data-count">
+                                    <span class="filter-count"></span> selected out of <span class="total-count"></span> records
+                                  </div>
+                                  <br />
+                                  <div id="bubble-chart">
+                                      <span class="chart-title">15000 Customer by Scores<br />&nbsp;&nbsp;&nbsp;[radius - mScore]</span>
+                                      <a class="reset" href="javascript:customerBubbleChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                      <p class="subText"> select customer to filter </p>
+                                  </div>
+                            </div>
+                        </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="customer">
+                        <div class="container" id="customer-container" style="display: none;">
+                            <div class="row">
+                                <button onclick="mySearchFunction()" style="float:right;" class="button1"> Fetch </button>
+                                <input type="search" id="mySearch" placeholder="enter a customer id.." style="float:right;" />
+                            </div>
+                            <br />
+                            <div class="row">
+                                  <div id="custComposite">
+                                      <span class="chart-title">Magneto Score Components Over Time</span>
+                                      <br />
+                                      <strong id="customerIDVal">Insights for CustID - 1 </strong>
+                                      <a class="reset" href="javascript:functionCompositeChart.filterAll('customerChartGrp');dc.redrawAll('customerChartGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                  <div id="cust-year-bar">
+                                      <span class="chart-title">Annual Customer Distribution</span>
+                                      <p class="subText"> select year to filter </p>
+                                      <a class="reset" href="javascript:functionCustYear.filterAll('customerChartGrp');dc.redrawAll('customerChartGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                                  <div id="cust-market-pie">
+                                    <span class="chart-title">Market Shares</span>
+                                    <p class="subText"> select market to filter </p>
+                                    <a class="reset" href="javascript:functionCustMarket.filterAll('customerChartGrp');dc.redrawAll('customerChartGrp');" style="display: none;">reset</a>
+                                    <div class="clearfix"></div>
+                                  </div>  
+                                   <br />
+                                  <div class="dc-data-count" id="customerCount">
+                                      <span class="filter-count"></span> selected out of <span class="total-count"></span> records
+                                  </div>
+                            </div>
+                        </div>  
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sector">
+                        <div class="container" id="sector-container" style="display: none;">
+                            <div class="row">
+                                  <div id="avg-line-chart">
+                                      <span class="chart-title">Average Scores Over Time</span>
+                                  </div>
+                                  <div id="avg-volume-chart">
+                                      <span class="chart-title">Select time range to zoom in</span>
+                                      <a class="reset" href="javascript:avgVolChart.filterAll('magScoresGrp');dc.redrawAll('magScoresGrp');" style="display: none;">reset</a>
+                                      <div class="clearfix"></div>
+                                  </div>
+                            </div>
+                        </div>  
+                </div>
+                <div role="tabpanel" class="tab-pane" id="eda">
+                        <div class="container" id="eda-container" style="display: none;">
+                             <div class="row">
+                                  <div id="top-bubble-chart">
+                                      <span class="chart-title">Top 50 Customers based on mean comp_mscore, ic_net_score &amp; gdi_net_score</span>
+                                      <p class="subText"> select customer to filter </p>
+                                  </div>
+                            </div>
+                            <div class="row">
+                                  <div id="top-table">
+                                      <table class="table table-hover dc-data-table" id="top-cust-table">
+                                            <thead>
+                                            <tr class="header">
+                                                <th>CustID</th>
+                                                <th>Average comp_mscore</th>
+                                                <th>Average ic_net_score</th>
+                                                <th>Average gdi_net_score</th>
+                                                <th>Segment</th>
+                                            </tr>
+                                            </thead>
+                                      </table>
+                                  </div>
+                            </div>
+                        </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="wrk">
+                        <p>My workflow consist of the following componenets:</p>
+                        <h5>- Exploratory Analysis</h5>
+                        <p class="workflowPara"> First up, I wanted to perform exploratory analysis on the dataset in otder to find the posible features that contains key insights. <br />
+                        So I used <span class="highlightText"> Python - Pandas</span> to group by and apply conditions on the features to visualize the outcomes with <span class="highlightText"> seaborn. </span>
+                        Looking at the distributions of features, I realized I was not able to build any meaningful time series unless I break down the dataset based on one or more features. eg -
+                        Customer ID gives us individual time series.
+                        </p>
+                        <h5>- Wireframing</h5>
+                        <p class="workflowPara">At this point, I did my initial wireframing for the plots based on the data and the outcome I extracted from my exploratory analysis.</p>
+                        <h5>- Project Planning</h5>
+                        <p class="workflowPara">Before starting my development, I had to make some decisions on what kind of tools I am going to use to build my plots with keeping in mind the the possible features I wanted to bring into the plots.</p>
+                        <h5>- Setting up my Backend</h5>
+                        <p class="workflowPara">Next I worked on setting up my backend as a microservice with <span class="highlightText"> Flask - Python</span> to serve the transformed data after grouping functions are applied. <a href="https://github.com/Santhosh114/Flask-MicroService">GitHub</a></p>
+                        <h5>- Preparing my Frontend</h5>
+                        <p class="workflowPara">Built my template and mapper functions to integrate multiple crossfilter enabled plots &amp; to redraw each chart group during tab onClick events to keep the DOM lightweight.</p>
+                        <h5>- Building my Filters</h5>
+                        <p class="workflowPara">Built my filter - dimentions &amp; groups with <span class="highlightText">crossfilter.js</span> which acts as a basic framework for the plots to filter each other in response to onClick events </p>
+                        <h5>- Charting</h5>
+                        <p class="workflowPara"> With <span class="highlightText">DC.js</span> I have composed my plots and these could be converted into a reusable chart module with little effort. <a href="https://github.com/Santhosh114/Santhosh114.github.io/tree/master/equinix/js">GitHub</a></p>
+                        <h5>- Code clean-up</h5>
+                        <p class="workflowPara">Finally I wrapped it up with code cleanup, crossbrowser testing and version control. </p>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="about">
+                <h5>Dataset:</h5>
+                    <ul class="about-data">
+                      <li> year – year of score </li>
+                      <li> month – month of score </li>
+                      <li> market – region of customer: AMER is Americas, APAC is Asia Pacific, EMEA is Europe, Middle East and Africa </li>
+                      <li> cust_id – a unique ID of each customer </li>
+                      <li> cust_segment – we divide our customers into various buckets of business sectors </li>
+                      <li> comp_mscore – composite m-score. A higher score represents deeper and denser co-system </li>
+                      <li> ic_net_score – interconnection score. A measure of how well connected a customer is </li>
+                      <li> gdi_net_score -  weighted average of net IBX (datacenter) presence and net metro presence. Higher score means a higher presence within the region </li>
+                      <li> cc_count_as_zside – cross connect (line between two machines owned by different customers within a datacenter) count, for incoming connections </li>
+                      <li> cc_count_as_aside – cross connect count, for outgoing connections </li>
+                      <li> net_ibx_presence – total number of IBXs that the customer is in within the region </li>
+                      <li> net_metro_presence – total number of metros (areas of datacenters) that the customer is in within the region </li>
+                    </ul>
+                </div>
+        </div>
+      </div>
+    </div>
+	</div>
+</div>
+
+<script src="../equinix/package/jquery.min.js"></script>
+
+<script src="../equinix/package/d3.v3.min.js"></script>
+
+<script src="../equinix/package/crossfilter.min.js"></script>
+
+<script src="../equinix/package/dc.min.js"></script>
+
+<script src="../equinix/js/compositeInsights.js"></script>
+
+<script src="../equinix/js/customerInsights.js"></script>
+
+<script src="../equinix/js/top50customers.js"></script>
+
+<script src="../equinix/js/mapper.js"></script>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Expenditure Dashboard</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//expdashboard.html" />
+  <id>http://santhosh114.github.io//expdashboard</id>
+  <published>2017-08-22T00:00:00Z</published>
+  <updated>2017-08-22T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>.container {
+  width: auto;
+  max-width: 960px;
+  text-align: center;
+}
+</style>
+
+<style>@import url(../crossfilter/dashboardStyle.css);</style>
+
+<style>@import url(../static/css/dc.min.css);</style>
+
+<div class="container" id="ww-container">
+  <div class="row">
+
+  <div id="ww-capacity-line">
+    <div class="chart-heading">
+    <h5>Daily production and advertising expenditures</h5>
+    </div>
+  </div>
+
+  <div id="ww-capacity-pie">
+    <div class="chart-heading">
+    <h5>Avg Proportion - Ads Vs Prod.</h5>
+    </div>
+  </div>
+
+  <div id="ww-fscount-line">
+    <div class="chart-heading">
+    <h5>Ad Outlets Timeline </h5>
+    </div>
+  </div>
+
+  <div id="ww-volume-chart">
+    <div class="chart-heading">
+    <h5>Filter TimeSeries
+    <a href="javascript:dc.filterAll('wwChartGrp'); dc.renderAll('wwChartGrp');" class="rset"> Reset Selection</a>
+    </h5>
+    </div>
+  </div>
+
+
+  </div>
+</div>
+<p><br /></p>
+
+<blockquote>
+  <p>Post updated with my critique on the dashboard for an interview process with <a href="http://www.acumenllc.com/">Acumen LLC</a>.</p>
+</blockquote>
+
+<h2 id="overview">Overview:</h2>
+
+<p>This data visualization dashboard depicts the expenditures accounted for retail client for the production and advertising respectively. This data is sourced from UIC time series data repository for academic purposes, ranging over 12 months on a data point per day basis with random missing values.</p>
+
+<p>One can just glance over the visualization to see the trend in the dashboard or zoom in to specific timelines for a more intimate look. Hovering one’s cursor over the lines reveals the value of each variable with its associated date. Total expenditure, production costs advertising costs, proportions <em>(reflecting the most recent datapoint)</em> and the number of Ad outlets represented in their own independent scope help the viewer understand the visualization in context. It’s a simple construction, approachable to the general public and scientifically accurate.</p>
+
+<hr />
+
+<h2 id="trifecta-checkup">Trifecta Checkup:</h2>
+
+<p>One of the first visualization review framework I would like to apply is the <a href="http://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html">Trifecta Checkup</a>, it is widely used in the industry to interpret visualizations correctly, distinguish the good from the bad. The trifecta checkup involves answering these three basic questions.</p>
+
+<ul>
+  <li>What is the QUESTION? (Q)</li>
+  <li>What does the DATA say? (D)</li>
+  <li>What does the VISUAL say? (V)</li>
+</ul>
+
+<p>QDV is seen as three vertices of a triangle that one aims to render effectively to the state of Trifecta, meaning <em>“Everything is in sync and the chart has no weaknesses!”</em></p>
+
+<p>Q - The question that this visualization answers is “What is the time series trend of expense types &amp; their possible correlations with number of Ad campaigns?” I feel the question seeks the right insight from the data, i.e. it not only seek a visual story of various expenditures hence it is ensured it is engaging.</p>
+
+<p>D - The Data was derived for academic purposes &amp; has relevance to the questions that is being asked. Theory says “Relevance can often be augmented by reducing noise, removing errors or transformations”, hence I made sure the chart element accept data that is not uniformly distributed across the time series and normalized the data.</p>
+
+<p>V - The Visual elements should represent the Data in a clear, concise manner, addressing the Question directly. Lets take few concrete heuristics into account to come into a conclusion about the expenditures dashboard.</p>
+
+<hr />
+
+<h2 id="visualization-specific-heuristics">Visualization Specific heuristics:</h2>
+
+<h5 id="information-coding"><strong>Information Coding</strong></h5>
+<p>Perception of information is directly dependent on the mapping of data elements to visual objects. 
+In this dashboard, time series trends are visualized as line graphs and stacked line graphs, associated pie aggregation. As we know, perceptual accuracy is at its best with <a href="https://goo.gl/images/JFDZtd">position and length</a>, which is basis of a line chart and one can be sure of the accuracy of information projected perceptually.  This should be enhanced by using realistic characteristics/techniques or the use of additional symbols known as <a href="http://www.infovis-wiki.net/index.php?title=Glyph">glyphs</a>. In this visualization, we have tried to provide a grid outline in the background of the plots that enhances the ability to perceive the numbers.</p>
+
+<h5 id="spatial-organization"><strong>Spatial Organization</strong></h5>
+<p>The concerns of users’ orientation in the information space can be met with how the elements are distributed in the layout, precision and legibility, efficiency in space usage and distortion of visual elements. In this dashboard, we can see the charts well position and the visibility of elements are optimized based on its priority. I have taken liberty with the padding property &amp; youtube like tiles to space out individual charts.</p>
+
+<h5 id="orientation-and-help"><strong>Orientation and Help</strong></h5>
+<p>These are functions like support to control levels, markers to zoom-in zoom-out, redo/undo of actions and representing additional information such as labels &amp; directions. The dashboard accomplishes orientation and help with smart spacing and labeling with minimal chart junks, to achieve this, I forfeited the usage of additional buttons and UI elements and had used plain text and hyperlinks - Reset selection is a realization of this property.</p>
+
+<h5 id="minimal-actions"><strong>Minimal Actions</strong></h5>
+<p>Concerns workload with respect to the number of actions necessary to extract insights. At its core, this dashboard hosts a crossfilter layer that performs <a href="https://github.com/square/crossfilter/wiki/API-Reference">Map-Reduce</a> to aggregate data and slice data based on the user interaction. So when a user select a certain time range in the filter chart element, the dashboard reflects changes based on the user selection. Since this is a minimal version of my previous implementations of dashboards, this has super minimal actions required to extract a trend. One can add more depth to this dashboard by adding more actions to each plot and essentially more plots to broaden the composite view.</p>
+
+<h5 id="recognition-rather-than-recall"><strong>Recognition Rather than Recall</strong></h5>
+<p>Dashboard assumes minimal prior knowledge of such visual interpretation and that encoding we used is pretty straightforward so the user may not have to memorize a lot of information to carry out tasks.</p>
+
+<h5 id="chart-junks"><strong>Chart Junks</strong></h5>
+<p>Concerns whether any extra information can be a distraction so the dashboard is kept at its minimal level of styling. The lines elements for total funds and 85% Threshold is technically and example of minimalchart junk. This is one of the most important property underlined in the <a href="http://www.sealthreinhold.com/school/tuftes-rules/rule_three.php">Edward Tufte’s Visual Design Rules!</a></p>
+
+<hr />
+
+<h2 id="technologies-used">Technologies Used:</h2>
+<p>This is a minimal dashboard built with <a href="https://d3js.org/">D3.js</a> in conjuncture with <a href="http://square.github.io/crossfilter/">Crossfilter</a> a charting library with advanced filtering capabilities powered by “Square” giving rise to <a href="https://dc-js.github.io/dc.js/">DC.js</a>.
+Hence the dashboard itself is an amalgamation of D3.js, Crossfilter and DC.js and out of the box customization of the library itself to achieve desired styles. The layouts are designed with vanila CSS.</p>
+
+<hr />
+
+<h2 id="room-for-improvement">Room For Improvement:</h2>
+
+<h5 id="more-action-components"><strong>More Action components</strong></h5>
+<p>Given a business requirement, I would add more action components to this dashboard, for example, we can aggregate the proportions pie chart every time a user select instead of the most recent data point.</p>
+
+<h5 id="prediction-of-trends"><strong>Prediction of trends</strong></h5>
+<p>I personally liked to have a prediction component as an extension similar to a <a href="https://goo.gl/images/JqTB7g">holt-winter</a> realization of predictive component.</p>
+
+<h5 id="color-coding"><strong>Color coding</strong></h5>
+<p>The <em>Ad</em> attribute could have a common color in both plots <em>i.e. orange on both line charts</em> that enhances perception by visual grouping.</p>
+
+<p><br /></p>
+
+<p><em>In summary, this is a successful dashboard implementation that offers out of the box features for interaction from modern JS frameworks.</em></p>
+
+<script src="../equinix/package/jquery.min.js"></script>
+
+<script src="../equinix/package/d3.v3.min.js"></script>
+
+<script src="../equinix/package/crossfilter.min.js"></script>
+
+<script src="../equinix/package/dc.min.js"></script>
+
+<script src="crossfilter/dcdash.js"></script>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Chernoff Faces - D3.js</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//chernoff.html" />
+  <id>http://santhosh114.github.io//chernoff</id>
+  <published>2016-08-10T00:00:00Z</published>
+  <updated>2016-08-10T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>
+.container {
+  width: auto;
+  max-width: 800px;
+  text-align: center;
+}
+.domain {
+        fill: none;
+        stroke: #777;
+      }
+.tick line{
+    stroke: #777;
+}
+</style>
+
+<div id="bars"></div>
+<div id="faces"></div>
+<script src="//code.jquery.com/jquery-2.0.0.js"></script>
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+
+<h3 id="implementation"><a href="">Implementation:</a></h3>
+
+<p>“Chernoff faces, invented by Herman Chernoff in 1973, display multivariate data in the shape of a human face.” ~Wiki</p>
+
+<p>As we know, to visualise multivariate data, we resort to other visualization techniques such as <a href="http://www.infovis-wiki.net/index.php?title=Glyph">Glyphs</a>.</p>
+
+<p>Chernoff faces are one such glyph that assign a bunch of variables at once via facial features like lips, eyes, and nose size etc.</p>
+
+<p>Here is Chernoff implementation with pure D3.js.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">chernoffFaceRadiusRange</span><span class="o">=</span><span class="p">{</span><span class="na">min</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="na">max</span><span class="p">:</span><span class="mi">60</span> <span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">chernoffFaceRadiusScale</span><span class="o">=</span><span class="nx">d3</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">linear</span><span class="p">()</span>
+                            <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="nx">salaryCompRange</span><span class="p">.</span><span class="nx">min</span><span class="p">,</span> <span class="nx">salaryRange</span><span class="p">.</span><span class="nx">max</span><span class="p">])</span>
+                            <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="nx">chernoffFaceRadiusRange</span><span class="p">.</span><span class="nx">min</span><span class="p">,</span> <span class="nx">chernoffFaceRadiusRange</span><span class="p">.</span><span class="nx">max</span><span class="p">]);</span>
+                            
+<span class="kd">var</span> <span class="nx">chernoffFaceDIV</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'#faces'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"chernoffFaces"</span><span class="p">)</span>
+  
+<span class="kd">var</span> <span class="nx">chernoffFaceSVG</span><span class="o">=</span><span class="nx">chernoffFaceDIV</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>        <span class="c1">// create an svg element</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="nx">svgWidth</span><span class="p">)</span> <span class="c1">// set its dimentions</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="nx">svgHeight</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">chernoffFaceHolder</span><span class="o">=</span><span class="nx">chernoffFaceSVG</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+                             <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">salaryData</span><span class="p">)</span>
+                             <span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+
+ <span class="c1">//step 1.21 update cx, cy and r value for faces, leftEye and rightEye</span>
+ <span class="kd">var</span> <span class="nx">faces</span><span class="o">=</span><span class="nx">chernoffFaceHolder</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"salary"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                            <span class="k">return</span> <span class="p">(</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span><span class="p">;</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                            <span class="k">return</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">salary</span><span class="p">)</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span><span class="s2">"#b6baba"</span><span class="p">)</span>
+ <span class="kd">var</span> <span class="nx">rightEyes</span><span class="o">=</span><span class="nx">chernoffFaceHolder</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"salaryA"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                            <span class="k">return</span> <span class="p">((</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span> <span class="o">-</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                             <span class="k">return</span> <span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                            <span class="k">return</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salaryA'</span><span class="p">])</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span><span class="s2">"#e76020"</span><span class="p">)</span>
+                        
+ <span class="kd">var</span> <span class="nx">leftEyes</span><span class="o">=</span><span class="nx">chernoffFaceHolder</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'circle'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"salaryB"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cx'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                           <span class="k">return</span> <span class="p">(</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span> <span class="o">+</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'cy'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                             <span class="k">return</span> <span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                        <span class="p">})</span> 
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                             <span class="k">return</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salaryB'</span><span class="p">])</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span><span class="s2">"#ed9040"</span><span class="p">)</span>
+                        
+<span class="c1">//updating attribute "d"</span>
+<span class="kd">var</span> <span class="nx">mouths</span><span class="o">=</span><span class="nx">chernoffFaceHolder</span>
+                        <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'path'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"salaryC"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'d'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+                            <span class="nx">r</span><span class="o">=</span><span class="mi">0</span>
+                            <span class="nx">start</span><span class="o">=</span><span class="s2">"M "</span>
+                            <span class="nx">Ay</span><span class="o">=</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                            <span class="nx">Ax</span><span class="o">=</span><span class="p">((</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span> <span class="o">-</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                            <span class="nx">Cy</span><span class="o">=</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                            <span class="nx">Cx</span><span class="o">=</span> <span class="p">(</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span> <span class="o">+</span> <span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+                            
+                            <span class="nx">By</span><span class="o">=</span><span class="p">((</span><span class="nx">svgHeight</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salary'</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nx">chernoffFaceRadiusScale</span><span class="p">(</span><span class="nx">d</span><span class="p">[</span><span class="s1">'salaryC'</span><span class="p">])))</span>
+                            <span class="nx">Bx</span><span class="o">=</span><span class="p">(</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nx">subChartWidth</span><span class="p">;</span>
+                            
+                            <span class="nx">d</span><span class="o">=</span><span class="nx">start</span><span class="o">+</span><span class="nx">Ax</span><span class="o">+</span><span class="s1">' '</span><span class="o">+</span><span class="nx">Ay</span><span class="o">+</span><span class="s1">' Q '</span><span class="o">+</span><span class="nx">Bx</span><span class="o">+</span><span class="s1">' '</span><span class="o">+</span><span class="nx">By</span><span class="o">+</span><span class="s1">' '</span><span class="o">+</span><span class="nx">Cx</span><span class="o">+</span><span class="s1">' '</span><span class="o">+</span><span class="nx">Cy</span><span class="o">+</span><span class="s1">' '</span>
+                            <span class="k">return</span> <span class="nx">d</span>
+                        <span class="p">})</span>
+                        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span><span class="s2">"#31a354"</span><span class="p">)</span></code></pre></figure>
+
+<script type="text/javascript">
+var salaryData = 
+            [{name:"A",dept:"IT",salaryA:1, salaryB:3, salaryC:2},
+            {name:"B",dept:"HR",salaryA:1.5, salaryB:2, salaryC:3.5},
+            {name:"C",dept:"HR",salaryA:1, salaryB:1, salaryC:1},
+            {name:"D",dept:"IT",salaryA:1, salaryB:3, salaryC:1},
+            {name:"E",dept:"SL",salaryA:1, salaryB:0.5, salaryC:3.5}
+            ];
+var listOfProjects=["salaryA","salaryB","salaryC"]
+
+/////// HELPER FUNCTIONS  ////////////////////////////////////
+
+function calculateTotalSalary(data,projectsList) {
+//input a data and a list of project
+//calculate the sum salary of all projects in the projectsList, and store it in the data under a field called “salary” 
+  
+  for (idx in data) {  // for every employee
+    employee = data[idx];  // grab the employee
+    // calculate their salary as a total of all project
+    var salary=0
+    for (p of projectsList){
+        salary+=employee[p]
+    }
+    employee.salary = salary
+  }
+}
+calculateTotalSalary(salaryData,listOfProjects);
+
+
+  
+function findDeptMean(data){
+    //calculate mean salary of each department 
+//return a dictionary of department means. 
+ 
+    meansByDept={}
+    for (d of data){//find all unique departments 
+        meansByDept[d["dept"]]=undefined //temporarly set to undefined 
+    };
+    for (key in meansByDept){
+        //using d3 helper function to get mean 
+        meanValue=d3.mean(data,function(d){
+        if(d['dept']==key){
+            return d.salary 
+        }
+        })
+        meansByDept[key]=meanValue
+    }
+    return meansByDept
+}
+meansByDept=findDeptMean(salaryData)
+
+
+/// helper function to calculate over under
+function addingOverunder(data){
+    //calculate and add overunder information to the data
+    for (d of data){
+        d["overunder"]=d.salary-meansByDept[d.dept]
+    }
+}
+addingOverunder(salaryData)
+
+function findMinMaxRange(data,fieldName){
+    var minValue=d3.min(data,function(d,i){
+        return d[fieldName]
+    })
+    var maxValue=d3.max(data,function(d,i){
+        return d[fieldName]
+    })
+    return ({"min":minValue,"max":maxValue})
+}
+
+var overunderRange=findMinMaxRange(salaryData,"overunder")
+var salaryRange=findMinMaxRange(salaryData,"salary")
+
+function findSalaryCompRange(data,projectList){
+    var salaryCompRange={min:Number.POSITIVE_INFINITY, max:Number.NEGATIVE_INFINITY}
+    for (project of projectList){
+        var minMaxDict=findMinMaxRange(salaryData,project)
+        if(minMaxDict.min<salaryCompRange.min){
+            salaryCompRange.min=minMaxDict.min
+        }
+        if(minMaxDict.max>salaryCompRange.max){
+            salaryCompRange.max=minMaxDict.max
+        }
+    }
+    return salaryCompRange
+}
+
+var salaryCompRange=findSalaryCompRange(salaryData,listOfProjects)
+
+//////////// END HELPER FUNCTIONS BASED ON LAST LAB /////////////////////////////
+
+
+/////////////////settings for chart 
+var svgWidth=800
+var svgHeight=200 
+var subChartWidth=svgWidth/salaryData.length
+
+//////////////////plot bar charts/////////////////////
+//settings for bar chart
+var xStartLoc=35 //the left offset from canvas to the first bar 
+var spaceBetweenBar=5
+var yStartLoc=120 // the top offset from canvas to the bottom of the bar. 
+var width=15 //width of bar 
+var xLoc=width+spaceBetweenBar
+var salaryCompHeightRange={min:0, max:100 }
+
+
+var salaryCompHeightScale=d3.scale.linear()
+                            .domain([salaryCompRange.min,salaryCompRange.max])
+                            .range([ salaryCompHeightRange.min,salaryCompHeightRange.max]);
+
+var salaryCompDIV = d3.select('#bars')
+                        .attr("class","barCharts")
+                        .attr("font-family","Arial")
+
+                      
+var salaryCompSVG=salaryCompDIV.append('svg')        // create an <svg> element
+    .attr('width', svgWidth) // set its dimentions
+    .attr('height', svgHeight)
+
+var salaryCompG=salaryCompSVG.selectAll('rect')
+                             .data(salaryData)
+                             .enter()
+function plotEachBar(colorOfBar,xStart,fieldName){
+//this function will plot bars for a project, also label the bar. 
+//return pointers to the bars and labels. 
+
+    var barForSingleProject=salaryCompG
+                        .append('rect')
+                        .attr('class',fieldName)
+                        .attr('x',function(d,i){
+                            return xStartLoc+xStart+i*subChartWidth
+                        })
+                        .attr('y',function(d){
+                            return yStartLoc-salaryCompHeightScale(d[fieldName]) 
+                        })
+                        .attr('height',function(d){
+                            return salaryCompHeightScale(d[fieldName])
+                        })
+                        .attr('width',width)
+                        .style('fill',colorOfBar)
+    
+    var labelForSinglePorject=salaryCompG.append('text')
+                                         .text(fieldName.slice(-1))
+                                         .attr('x',function(d,i){
+                                            return xStartLoc+xStart+i*subChartWidth+5
+                                        })
+                                        .attr('y',yStartLoc+15)
+                                        .attr("font-family","Arial")
+                                        .attr("font-size","8pt");
+     return (barForSingleProject,labelForSinglePorject)
+}
+
+colorList=["#e76020", "#ed9040", "#31a354", "#74c476"]
+//draws bars for each project by looping through listOfProjects
+for(i in listOfProjects){
+    plotEachBar(colorList[i],i*(width+spaceBetweenBar),listOfProjects[i]) 
+}
+var salaryCompTitles=salaryCompG.append('text')
+                                .text(function(d){
+                                    return "Company "+d.name+" Salary" })
+                                .attr('x',function(d,i){
+                                    return xStartLoc/2+i*subChartWidth
+                                })
+                                .attr('y',yStartLoc+30)
+                                .attr("font-size","8pt")
+                                .attr("font-weight","Bold")
+                                .style('fill', '#999');                   
+///////////////////plot chernoff faces////////////
+//set up svg
+var chernoffFaceRadiusRange={min:0, max:60 }
+
+var chernoffFaceRadiusScale=d3.scale.linear()
+                            .domain([salaryCompRange.min, salaryRange.max])
+                            .range([chernoffFaceRadiusRange.min, chernoffFaceRadiusRange.max]);
+                            
+var chernoffFaceDIV = d3.select('#faces')
+                        .attr("class","chernoffFaces")
+                        .attr("font-family","Arial")
+  
+var chernoffFaceSVG=chernoffFaceDIV.append('svg')        // create an <svg> element
+    .attr('width', svgWidth) // set its dimentions
+    .attr('height', svgHeight)
+
+var chernoffFaceHolder=chernoffFaceSVG.selectAll('circle')
+                             .data(salaryData)
+                             .enter()
+
+ //step 1.21 update cx, cy and r value for faces, leftEye and rightEye
+ var faces=chernoffFaceHolder.append('circle')
+                        .attr("class","salary")
+                        .attr('cx',function(d,i){
+                            return (i+1/2)*subChartWidth;
+                        })
+                        .attr('cy',svgHeight/2)
+                        .attr('r',function(d,i){
+                            return chernoffFaceRadiusScale(d.salary)
+                        })
+                        .style('fill',"#b6baba")
+ var rightEyes=chernoffFaceHolder.append('circle')
+                        .attr("class","salaryA")
+                        .attr('cx',function(d,i){
+                            return ((i+1/2)*subChartWidth - chernoffFaceRadiusScale(d['salary'])/2)
+                        })
+                        .attr('cy',function(d,i){
+                             return svgHeight/2-chernoffFaceRadiusScale(d['salary'])/2
+                        })
+                        .attr('r',function(d,i){
+                            return chernoffFaceRadiusScale(d['salaryA'])
+                        })
+                        .style('fill',"#e76020")
+                        
+ var leftEyes=chernoffFaceHolder.append('circle')
+                        .attr("class","salaryB")
+                        .attr('cx',function(d,i){
+                           return (i+1/2)*subChartWidth + chernoffFaceRadiusScale(d['salary'])/2
+                        })
+                        .attr('cy',function(d,i){
+                             return svgHeight/2 - chernoffFaceRadiusScale(d['salary'])/2
+                        }) 
+                        .attr('r',function(d,i){
+                             return chernoffFaceRadiusScale(d['salaryB'])
+                        })
+                        .style('fill',"#ed9040")
+                        
+//step 1.3, updating attribute "d"
+var mouths=chernoffFaceHolder
+                        .append('path')
+                        .attr("class","salaryC")
+                        .attr('d',function(d,i){
+                            r=0
+                            start="M "
+                            Ay=svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2
+                            Ax=((i+1/2)*subChartWidth - chernoffFaceRadiusScale(d['salary'])/2)
+                            Cy=svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2
+                            Cx= (i+1/2)*subChartWidth + chernoffFaceRadiusScale(d['salary'])/2
+                            
+                            By=((svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2)+(chernoffFaceRadiusScale(d['salaryC'])))
+                            Bx=(i+1/2)*subChartWidth;
+                            
+                            d=start+Ax+' '+Ay+' Q '+Bx+' '+By+' '+Cx+' '+Cy+' '
+                            return d
+                        })
+                        .style('fill',"#31a354")
+//step 1.3, add titles for each subchart. 
+var chernoffTitle=chernoffFaceHolder.append('text')
+                                .text(function(d){
+                                    return "Company "+d.name+" Salary";
+                                })
+                                .attr('x',function(d,i){
+                                       return (i+1/4)*subChartWidth-10;
+                                })
+                                .attr('y',(svgHeight/1.15))//your work here 
+                                .attr("font-size","8pt")
+                                .attr("font-weight","Bold")
+                                .style('fill', '#999');
+
+
+// ////////////////Part2 add data and update chart ///////////////////////
+
+salaryD=[1,1.4,2,0,2.5,0]
+//step 2.1 complete the following function that updates the data, ranges and scale. 
+function updateDataRangeScale(project,projectData){
+    if(listOfProjects.indexOf(project)==-1){//check if we have already added the project or not. 
+
+        // adding salaryD to salaryData
+        for(var i=0; i< salaryData.length; i++){
+           var obj= salaryData[i];
+           obj[project]=projectData[i];
+        }
+
+        // adding project to projectlist
+        listOfProjects.push(project);
+
+        // computing salary
+        calculateTotalSalary(salaryData,listOfProjects);
+
+        // computing depMean & updating overUnder
+        meansByDept = findDeptMean(salaryData)
+        addingOverunder(salaryData)
+
+        overunderRange=findMinMaxRange(salaryData,"overunder")
+        salaryRange=findMinMaxRange(salaryData,"salary")
+        salaryCompRange=findSalaryCompRange(salaryData,listOfProjects)
+
+        chernoffFaceRadiusScale.domain([salaryCompRange.min,salaryRange.max])
+    } 
+} 
+
+duration=800
+function updateFaces(){
+    chernoffFaceDIV.selectAll("circle."+"salary")
+                   .transition()
+                   .duration(duration)
+                   .attr('r',function(d,i){
+                       return chernoffFaceRadiusScale(d.salary)
+                   })
+}
+//Step 2.2
+function updateLeftEyes(){
+   //your work here 
+   chernoffFaceDIV.selectAll("circle."+"salaryB")
+                   .transition()
+                   .duration(duration)
+                   .attr('r',function(d,i){
+                       return chernoffFaceRadiusScale(d['salaryB'])
+                   })
+                   .attr('cy',function(d,i){
+                             return svgHeight/2 - chernoffFaceRadiusScale(d['salary'])/2
+                        })
+                    .attr('cx', function(d, i) {
+                        return ((subChartWidth * i + subChartWidth / 2) + chernoffFaceRadiusScale(d.salary) / 2)
+                         })
+                    .attr('r',function(d,i){
+                             return chernoffFaceRadiusScale(d['salaryB'])
+                        })
+
+}
+function updateRightEyes(){
+    //your work here 
+    chernoffFaceDIV.selectAll("circle."+"salaryA")
+                   .transition()
+                   .duration(duration)
+                   .attr('r',function(d,i){
+                       return chernoffFaceRadiusScale(d['salaryA'])
+                   })
+                   .attr('cy',function(d,i){
+                             return svgHeight/2-chernoffFaceRadiusScale(d['salary'])/2
+                        })
+                    .attr('cx', function(d, i) {
+                     return ((subChartWidth * i + subChartWidth / 2) - chernoffFaceRadiusScale(d.salary) / 2)
+                    })
+                   .attr('r',function(d,i){
+                            return chernoffFaceRadiusScale(d['salaryA'])
+                        })
+}
+
+
+
+
+function updateMouths(){
+    //your work here 
+    chernoffFaceDIV.selectAll("path."+"salaryC")
+                   .transition()
+                   .duration(duration)
+                   .attr('d',function(d,i){
+                            r=0
+                            start="M "
+                            Ay=svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2
+                            Ax=((i+1/2)*subChartWidth - chernoffFaceRadiusScale(d['salary'])/2)
+                            Cy=svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2
+                            Cx= (i+1/2)*subChartWidth + chernoffFaceRadiusScale(d['salary'])/2
+                            
+                            By=((svgHeight/2+chernoffFaceRadiusScale(d['salary'])/2)+(chernoffFaceRadiusScale(d['salaryC'])))
+                            Bx=(i+1/2)*subChartWidth;
+                            
+                            d=start+Ax+' '+Ay+' Q '+Bx+' '+By+' '+Cx+' '+Cy+' '
+                            return d
+                        })
+}
+
+//Step 2.3 add salaryAsNoses 
+function addNoses(){
+    var noses=chernoffFaceHolder
+                        .append('ellipse')
+                        .attr("class","salaryD")
+                        .attr('cx',function(d,i){
+                             return (i+1/2)*subChartWidth;
+                        })
+                        .attr('cy',svgHeight/2)
+                        .attr('rx',function(d){
+                             return 0
+                        })//set to zero to add animation
+                        .attr('ry',function(d){
+                             return 0
+                        })//set zerion to add animation
+                        .style('fill',"#74c476")
+        noses.transition()
+             .duration(duration)
+             .attr('rx',function(d){
+                           return chernoffFaceRadiusScale(d['salaryD']) 
+                        })
+             .attr('ry',function(d){
+                            return chernoffFaceRadiusScale(d['salaryD'])/2
+                        })
+                       
+}
+
+function mouseEventForNose() {
+    chernoffFaceDIV.selectAll("ellipse")
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .on("mousemove", handleMouseMove)
+
+}
+
+function update(){
+    updateDataRangeScale('salaryD',salaryD)
+    updateFaces()
+    updateLeftEyes()
+    updateRightEyes()
+    updateMouths()
+    addNoses()
+    mouseEventForNose()
+    addSalaryDbars()
+    mouseEventForBarChart()
+}
+                
+chernoffButton=chernoffFaceDIV
+                .append("button")
+                .text("Add new feature to data!")
+                .attr("type","button")
+                .attr("value","Update Data")
+                .attr("onclick","update()")
+                .style("height",40)
+                .style("width",90)
+
+///////////////////Part3 tooltip /////////////////   
+var chernoffTips=chernoffFaceDIV.append("div")
+                                .attr("class",'tooltip')
+                                .style("display","none")
+                                .style('position',"absolute")
+                                .style("fill","black")
+function handleMouseOver(d,i){
+    chernoffTips.style("display","inline")             
+}
+function handleMouseMove(d,i){
+    fieldName=d3.select(this).attr('class')
+    chernoffTips.text(d.name+" "+fieldName+": "+d[fieldName])
+      .style("left", (d3.event.pageX - 34) + "px")
+      .style("top", (d3.event.pageY - 12) + "px")
+      .style("color","black");
+}
+function handleMouseOut(d,i){
+     chernoffTips.style("display", "none");
+}
+
+chernoffFaceDIV.selectAll("circle")
+      .on("mouseover", handleMouseOver)
+      .on("mouseout",handleMouseOut)
+      .on("mousemove", handleMouseMove)
+chernoffFaceDIV.selectAll("path")
+      .on("mouseover",handleMouseOver)
+      .on("mouseout",handleMouseOut)
+      .on("mousemove", handleMouseMove)  
+              
+ ///////////part 3 end////////////////
+ //////part 4////////
+ //step 4.1 compelete the following function 
+ // Hint if you use the helper function plotEachBar(), this can be done with one line of code 
+ //Call this function in update()
+function addSalaryDbars(){
+    plotEachBar(colorList[3], 3 * (width + spaceBetweenBar), listOfProjects[3])
+}
+//step 4.2 adding axis  
+var yAxisScale=d3.scale.linear()
+                            .domain([salaryCompRange.min,salaryCompRange.max])
+                            .range([ salaryCompHeightRange.max,salaryCompHeightRange.min])
+
+var yAxis = d3.svg.axis()
+                  .scale(yAxisScale)
+                  .orient("left")
+                  
+salaryCompG.append('g')
+            .call(yAxis)
+            .attr('transform',function(d,i){
+                return 'translate(' + (30 + i * subChartWidth) + ',' + 20 + ')'
+            });
+//step 4.3 adding tooltips for bar charts 
+var barToolTip = salaryCompDIV.append("div")
+    .attr("class", 'tooltip')
+    .style("display", "inline")
+    .style('position', "absolute")
+    .style("fill", "black")
+
+function handleMouseOver(d, i) {
+    barToolTip.style("display", "inline")
+}
+
+function handleMouseMove(d, i) {
+    fieldName = d3.select(this).attr('class')
+    barToolTip.text(d.name + " " + fieldName + ": " + d[fieldName])
+        .style("left", (d3.event.pageX - 34) + "px")
+        .style("top", (d3.event.pageY - 12) + "px")
+        .style("color", "black");
+}
+
+function handleMouseOut(d, i) {
+    barToolTip.style("display", "none");
+}
+
+
+function mouseEventForBarChart() {
+    salaryCompDIV.selectAll("rect")
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .on("mousemove", handleMouseMove)
+}
+mouseEventForBarChart();   
+
+</script>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Parallel Coordinates - The Rockstar InfoViz</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//parallel.html" />
+  <id>http://santhosh114.github.io//parallel</id>
+  <published>2016-07-18T00:00:00Z</published>
+  <updated>2016-07-18T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>.container {
+  width: auto;
+  max-width: 800px;
+  text-align: center;
+
+}
+</style>
+
+<p><img src="../static/img/blog/parellelCoorditanes/par3.png" alt="Test Image" style="width:550px;height:283px;" /></p>
+
+<blockquote>
+  <p>This is an extract from Data Visualization course discussions at <a href="https://www.coursera.org/learn/datavisualization/lecture/phyRg/week-2-introduction">DViz by UIUC</a>.</p>
+</blockquote>
+
+<h3 id="why-parallel-coordinates"><a href="">Why parallel coordinates:</a></h3>
+<p>As we add more that 2 coordinates to any data representation we are going to face problems on a perceptual standpoint, since the essential representation medium itself is a 2D.</p>
+
+<p>So  Al Inselberg demonstrated the concept of parallel coordinates in the early 90s. Here is how it works.</p>
+
+<p><img src="../static/img/blog/parellelCoorditanes/par1.png" alt="Test Image" style="width:500px;height:299px;" /></p>
+
+<h3 id="nuts--bolts"><a href="">Nuts &amp; Bolts:</a></h3>
+<p>With parallel coordinates, we’re going to take the Cartesian coordinates. We have a horizontal x-axis and a vertical y-axis, and we’re going to take these axes and we’re going to make them parallel instead of orthogonal, at right angles, as they usually are.</p>
+
+<p><img src="../static/img/blog/parellelCoorditanes/par2.png" alt="Test Image" style="width:550px;height:283px;" /></p>
+
+<p>So now the two axes are not orthogonal. They’re parallel to each other and they don’t extend from the same origin. So the origin here is horizontally at the bottom and increasing x goes up this axis, increasing y goes up this axis. So now I’ve got the data points, and I need to figure out where these data points occur.</p>
+
+<p><img src="../static/img/blog/parellelCoorditanes/par3.png" alt="Test Image" style="width:550px;height:283px;" /></p>
+
+<p>We can map each point onto its corresponding position on the y-axis &amp; its just basically dragging them across horizontally, because their position in y in this chart corresponds to their height along this y-axis.</p>
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Interactive Visualization of US Airport Evolution</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//airport.html" />
+  <id>http://santhosh114.github.io//airport</id>
+  <published>2015-11-10T00:00:00Z</published>
+  <updated>2015-11-10T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>.container {
+  width: auto;
+  max-width: 1060px;
+  text-align: center;
+
+}
+</style>
+
+<div id="us_states">
+</div>
+<script src="//code.jquery.com/jquery-2.0.0.js"></script>
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+
+<script src="//d3js.org/topojson.v1.min.js"></script>
+
+<script src="airport/airport_viz.js"></script>
+
+<blockquote>
+  <p>This is an academic project for I590: Data Visualization course at <a href="https://www.indiana.edu">Indiana University, Bloomington</a>, Instructor: <a href="http://yongyeol.com">Yong Yeol Ahn</a>. Visit the project <a href="http://www.santhoshfiddle.com/geoSample/index.html">page</a> for more info on this concept ideation and our team.</p>
+</blockquote>
+
+<div class="myNote"></div>
+
+<div class="divider"></div>
+<p><a href="../research/Airport-evolution-Project.pdf">View this project research report presentation. </a></p>
+
+<h3 id="overview"><a href="">Overview:</a></h3>
+
+<p>This is a walkthrough of my project on creating interactive transitions using tween functions on objects tied to a map/geo-location in D3.js.</p>
+
+<p>Everything here is rendered in SVG!</p>
+
+<p>This US map is generated from the <a href="../geoSample/us.json">US.json</a></p>
+
+<h5>United States - Basemap:</h5>
+
+<div id="states">
+<script type="text/javascript">
+(function() {
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([800/2, 500/2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("#states").append("svg")
+    .attr("width", 750)
+    .attr("height", 500);
+
+d3.json("airport/us.json", function(error, us) {
+  if (error) return console.error(error);
+  console.log(us);
+
+  svg.selectAll("path")
+     .data(topojson.feature(us, us.objects.states).features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", "LightGray")
+      .attr("stroke", "White")
+      .on("mouseover", function(d) {
+          d3.select(this).style("fill", "CornflowerBlue");
+          })                  
+      .on("mouseout", function(d) {
+           d3.select(this).style("fill", "LightGray");
+          });
+
+});
+
+
+})();
+</script>
+</div>
+
+<p>The .on(“mouseover”,…) part is what makes this map interactive!</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="kd">var</span> <span class="nx">projection</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">geo</span><span class="p">.</span><span class="nx">albersUsa</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">translate</span><span class="p">([</span><span class="mi">800</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">500</span><span class="o">/</span><span class="mi">2</span><span class="p">]);</span>
+
+<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">geo</span><span class="p">.</span><span class="nx">path</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">projection</span><span class="p">(</span><span class="nx">projection</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"#states"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"svg"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span> <span class="mi">750</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+
+<span class="nx">d3</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="s2">"airport/us.json"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">us</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">us</span><span class="p">);</span>
+
+  <span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"path"</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">topojson</span><span class="p">.</span><span class="nx">feature</span><span class="p">(</span><span class="nx">us</span><span class="p">,</span> <span class="nx">us</span><span class="p">.</span><span class="nx">objects</span><span class="p">.</span><span class="nx">states</span><span class="p">).</span><span class="nx">features</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"path"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"d"</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"LightGray"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"stroke"</span><span class="p">,</span> <span class="s2">"White"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"mouseover"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"CornflowerBlue"</span><span class="p">);</span>
+          <span class="p">})</span>                  
+      <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"mouseout"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"LightGray"</span><span class="p">);</span>
+          <span class="p">});</span>
+<span class="p">});</span>
+<span class="p">})();</span></code></pre></figure>
+
+<div class="divider"></div>
+
+<div class="divider"></div>
+
+<p>A basemap is set at this point, lets go ahead and place the bar objects based on the geo-location or Lat/Long values that we pass along as a javascript variable “sampleData”.</p>
+
+<div id="unitedstates">
+<script type="text/javascript">
+(function() {
+
+var projection = d3.geo.albersUsa()
+    .scale(1000)
+    .translate([800/2, 500/2]);
+
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("#unitedstates").append("svg")
+    .attr("width", 750)
+    .attr("height", 500);
+
+d3.json("airport/us.json", function(error, us) {
+  if (error) return console.error(error);
+  console.log(us);
+
+  svg.selectAll("path")
+     .data(topojson.feature(us, us.objects.states).features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", "LightGray")
+      .attr("stroke", "White");
+
+
+
+var  sampleData = [ {"name": "San Francisco", "coordinates": [-122.417,37.783], "barheight": 100},
+            {"name": "Indiana", "coordinates": [-86.682,39.52], "barheight": 50},
+            {"name": "NewYork", "coordinates": [-73.778,40.63], "barheight": 80}              
+            ];
+
+  bars = svg.selectAll("g")
+    .data(sampleData)
+    .enter()
+    .append("g")
+    .attr("transform", function(d) {return "translate(" + projection(d.coordinates) + ")";});
+    
+    bars.append("rect")
+    .attr("transform", "rotate(180)")
+    .attr('width', 10)
+    .attr('height',  0)
+    .style("fill", "CornflowerBlue")
+    .attr('height',  function(d) {return d.barheight});
+
+      bars.append("text")
+      .style({
+        'fill':'#050505',
+        'font-family':'sans-serif',
+        'font-size':'7px'
+      })  
+      .attr("dy", ".80em")
+    .attr("text-anchor", "start") 
+    .text(function(d) {return d.name});
+
+
+  });
+
+
+})();
+</script>
+</div>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span>  <span class="nx">sampleData</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"coordinates"</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">122.417</span><span class="p">,</span><span class="mf">37.783</span><span class="p">],</span> <span class="s2">"barheight"</span><span class="p">:</span> <span class="mi">100</span><span class="p">},{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Indiana"</span><span class="p">,</span> <span class="s2">"coordinates"</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">86.682</span><span class="p">,</span><span class="mf">39.52</span><span class="p">],</span> <span class="s2">"barheight"</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"NewYork"</span><span class="p">,</span> <span class="s2">"coordinates"</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.778</span><span class="p">,</span><span class="mf">40.63</span><span class="p">],</span> <span class="s2">"barheight"</span><span class="p">:</span> <span class="mi">80</span><span class="p">}];</span>
+
+  <span class="nx">bars</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">sampleData</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="s2">"translate("</span> <span class="o">+</span> <span class="nx">projection</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span><span class="p">;});</span>
+    
+  <span class="nx">bars</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"rect"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"rotate(180)"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"CornflowerBlue"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">barheight</span><span class="p">});</span>
+
+  <span class="nx">bars</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"text"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">style</span><span class="p">({</span>
+       <span class="s1">'fill'</span><span class="p">:</span><span class="s1">'#050505'</span><span class="p">,</span>
+       <span class="s1">'font-family'</span><span class="p">:</span><span class="s1">'sans-serif'</span><span class="p">,</span>
+       <span class="s1">'font-size'</span><span class="p">:</span><span class="s1">'7px'</span>
+      <span class="p">})</span>  
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"dy"</span><span class="p">,</span> <span class="s2">".80em"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"text-anchor"</span><span class="p">,</span> <span class="s2">"start"</span><span class="p">)</span> 
+    <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">});</span>
+
+      </code></pre></figure>
+
+<div class="divider"></div>
+
+<p>And to create the bar transition representing the magnitude of flights in each airport is done in the following way:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">bars</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"rect"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"rotate(180)"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"CornflowerBlue"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">delay</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">20</span><span class="p">;</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">15000</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">barheight</span><span class="p">});</span>
+
+        </code></pre></figure>
+
+<div class="divider"></div>
+<p>Once the bars and their magnitudes are passed to the “bars” svg variable, we are set to make the final transition of the bar into a rectangle that can hold text in it.</p>
+
+<p>And I wont claim this as to be an ideal way to create a tooltip, infact this is not intented to be a tooltip but an overlay of line graphs similar to <a href="http://www.nytimes.com/interactive/2014/06/05/upshot/how-the-recession-reshaped-the-economy-in-255-charts.html">this @nytime_upshot</a> on mouseover event!</p>
+
+<div id="trans">
+<script type="text/javascript">
+(function() {
+var border=1;
+var bordercolor='black';
+
+var svg = d3.select("#trans").append("svg")
+	.attr('border', border)
+    .attr('width',740)
+	.attr('height',300);
+
+var borderPath = svg.append("rect")
+       			.attr("x", 0)
+       			.attr("y", 0)
+       			.attr("height", 300)
+       			.attr("width", 740)
+       			.style("stroke", bordercolor)
+       			.style("fill", "none")
+       			.style("stroke-width", border);
+
+
+	svg.append('rect').style('fill', '#005fcc')
+	    .attr("y", 20)
+		.attr("x", 20)
+        .attr('width', 15)
+        .attr('height', 100)
+        .attr("transform", function(d) {
+        	movinText = svg.append("text")
+			      .attr("y", 300)
+			      .attr("x", 800)
+			      .style("fill", "LightGrey")
+			      .style("font-size", "17px")
+			      .style("font-weight", "bold")
+			      .text("Denver International Airport").style('opacity', 0);
+        })
+        .on('mouseover',function(d) {
+		    d3.select(this).transition()
+		            .style('opacity', 1)
+		            .style('fill', "000066")
+		            .attr('width',  300)
+		            .attr('height',  160)
+		    movinText.style('opacity', 0.9)
+                    .transition()
+                    .attr("y", 100)
+                    .attr("x", 60)
+                    .duration(500)
+        })
+        .on('mouseout',function(d) {
+		    d3.select(this).transition()
+		            .style('opacity', 1)
+		            .style('fill', "#005fcc")
+		            .attr('width',  20)
+		            .attr('height',  100)
+		    movinText
+                    .transition()
+                    .attr("y", 300)
+                    .attr("x", 800)
+                    .style('opacity', 0)
+                    .duration(500)
+        })
+        
+        
+
+})();
+</script>
+</div>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="kd">var</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"#trans"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"svg"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
+	<span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+
+	<span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'rect'</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s1">'#005fcc'</span><span class="p">)</span>
+	    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+		<span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+        	<span class="nx">movinText</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"text"</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"LightGrey"</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"font-size"</span><span class="p">,</span> <span class="s2">"17px"</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"font-weight"</span><span class="p">,</span> <span class="s2">"bold"</span><span class="p">)</span>
+			      <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">"Denver International Airport"</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'mouseover'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+		    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">transition</span><span class="p">()</span>
+		            <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s2">"000066"</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span>  <span class="mi">300</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="mi">160</span><span class="p">)</span>
+		    <span class="nx">movinText</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+                    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'mouseout'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+		    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">transition</span><span class="p">()</span>
+		            <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span> <span class="s2">"#005fcc"</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span>  <span class="mi">20</span><span class="p">)</span>
+		            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span>  <span class="mi">100</span><span class="p">)</span>
+		    <span class="nx">movinText</span>
+                    <span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+                    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s1">'opacity'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">duration</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+        <span class="p">})</span>
+        
+        
+
+<span class="p">})();</span></code></pre></figure>
+
+<div class="divider"></div>
+
+<p>Putting things together would result in the visualization shown <a href="http://www.santhoshfiddle.com/geoSample/index.html">here!</a></p>
+
+<p>I hope this is helpfull in building an interactive map based visualization, I posted another blogpost on bubble plot on maps where the Year Clock is implemented.</p>
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">US College Majors Analysis &amp; their Salary Outcomes</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//collegemajors.html" />
+  <id>http://santhosh114.github.io//collegemajors</id>
+  <published>2015-10-25T00:00:00Z</published>
+  <updated>2015-10-25T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <iframe width="804" height="470" frameborder="0" scrolling="no" src="https://plot.ly/~sandyorbit/2.embed"></iframe>
+
+<h3 id="overview"><a href="">Overview:</a></h3>
+
+<p>This is an exploratory analysis of salary outcomes across various majors in the US.
+Also it would attempt to give the viewer a quick view of how various college majors are placed in the job market relatively. This features mean salaries and respective 25th and 75th percentile salary plotted to give a comprehensive outlook towards the salary distributiion itself in the following posts.</p>
+
+<p><a href="../research/project_college_majors.html">View this project research report. </a></p>
+
+<h3 id="dataset"><a href="">Dataset:</a></h3>
+<p>Although this data is smaller in size, it is a high dimentional sample with 17 features that makes it interesting for us to work with.
+Our dataset is sourced from census.org of college majors 2012-13 from <a href="https://github.com/fivethirtyeight/data/tree/master/college-majors">fivethirtyeight</a></p>
+
+<h3 id="visualization-technique"><a href="">Visualization Technique:</a></h3>
+
+<p>We have used the Bubble plot to visualize the magnitude of the student sample in terms of area of the bubble, the y-axis is the median salary of college majors, the x-axis is the total number of employed students in the respective majors. Bubbles are color coded besed on the type of major.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># Bubble plot of Median salary Vs number of students employed. </span>
+
+<span class="c"># We used four variables to give a comprehensive view of the college majors salary outcomes</span>
+<span class="c"># and those are:  1)Median salary in X-axis</span>
+<span class="c">#                 2)Employed # of students</span>
+<span class="c">#                 3)Color code for each major based on the major code</span>
+<span class="c">#                 4)Bubble area for the total number of students graduated. </span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">plotly.plotly</span> <span class="kn">as</span> <span class="nn">py</span>         
+<span class="c"># plot.ly is the api that we used to get the color smoothening and spacial spread</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>                     
+<span class="c"># (*) urllib2 for in-session downloads</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c"># Import data file from URL into pd datafram in session</span>
+<span class="n">salary_data_url</span> <span class="o">=</span> <span class="s">'https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/all-ages.csv'</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">salary_data_url</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+
+<span class="n">unemp_data_url</span> <span class="o">=</span> <span class="s">'https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/recent-grads.csv'</span>
+<span class="n">data_file2</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">unemp_data_url</span><span class="p">)</span>
+<span class="n">unemp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_file2</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+
+<span class="n">salary_bubble</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>          
+<span class="c"># set new figure object to pass it to the plot.ly api </span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">salary_bubble</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>  
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Number of Employed Students'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Median salary'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">25000</span><span class="p">,</span> <span class="mi">110000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">2100000</span><span class="p">])</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">'Employed_full_time_year_round'</span><span class="p">],</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">'Median'</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'Major_code'</span><span class="p">],</span>                <span class="c"># using majorcode as our color scale</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'Total'</span><span class="p">]),</span>             <span class="c"># taking square root to set the area for the bubbles  </span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s">'w'</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i_X</span><span class="p">,</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">X</span><span class="p">[</span><span class="s">'Employed_full_time_year_round'</span><span class="p">],</span>
+        <span class="n">X</span><span class="p">[</span><span class="s">'Median'</span><span class="p">],</span>
+        <span class="n">X</span><span class="p">[</span><span class="s">'Major'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span>              <span class="c"># only the first 15 letters</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s">'center'</span>
+    <span class="p">)</span></code></pre></figure>
+
+<p><img src="../static/img/blog/college/1.png" border="5" alt="Responsive image" /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">cufflinks</span> <span class="kn">as</span> <span class="nn">cf</span>             
+<span class="c">#importing cufflinks api to set the zooming for the plot</span>
+<span class="n">cf</span><span class="o">.</span><span class="n">set_config_file</span><span class="p">(</span><span class="n">offline</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">world_readable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">theme</span><span class="o">=</span><span class="s">'pearl'</span><span class="p">)</span>
+<span class="n">py</span><span class="o">.</span><span class="n">iplot_mpl</span><span class="p">(</span><span class="n">salary_bubble</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">'s6_bubble-chart'</span><span class="p">)</span> <span class="c">#passing the salary object to get the plot.ly style graph</span></code></pre></figure>
+
+<p><img width="804" height="380" src="../static/img/blog/college/2.png" border="5" alt="Responsive image" /></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">from</span> <span class="nx">pylab</span> <span class="kr">import</span> <span class="o">*</span>
+<span class="nx">from</span> <span class="nx">scipy</span> <span class="kr">import</span> <span class="o">*</span>
+<span class="kr">import</span> <span class="nx">matplotlib</span><span class="p">.</span><span class="nx">pyplot</span> <span class="nx">as</span> <span class="nx">plt</span>
+<span class="kr">import</span> <span class="nx">numpy</span> <span class="nx">as</span> <span class="nx">np</span>
+<span class="kr">import</span> <span class="nx">pandas</span> <span class="nx">as</span> <span class="nx">pd</span>
+
+
+<span class="nx">output_category</span><span class="o">=</span><span class="p">[]</span>                
+<span class="err">#</span> <span class="nx">a</span> <span class="nx">list</span> <span class="nx">to</span> <span class="nx">store</span> <span class="nx">all</span> <span class="nx">the</span> <span class="nx">categories</span>  
+<span class="k">for</span> <span class="nx">xcategory</span> <span class="k">in</span> <span class="nx">df</span><span class="p">[</span><span class="s1">'Major_category'</span><span class="p">]</span><span class="err">:</span>
+    <span class="k">if</span> <span class="nx">xcategory</span> <span class="nx">not</span> <span class="k">in</span> <span class="nx">output_category</span><span class="err">:</span>
+        <span class="nx">output_category</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">xcategory</span><span class="p">)</span>
+
+<span class="nx">print</span> <span class="nx">len</span><span class="p">(</span><span class="nx">output_category</span><span class="p">)</span>        
+<span class="err">#</span><span class="nx">check</span> <span class="nx">the</span> <span class="nx">length</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">list</span> <span class="nx">of</span> <span class="nx">categories</span> <span class="nx">to</span> <span class="nx">set</span> <span class="nx">colors</span> <span class="nx">based</span> <span class="nx">on</span> <span class="nx">its</span> <span class="nx">number</span>  
+
+<span class="nx">colour</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"teal"</span><span class="p">,</span><span class="s2">"brown"</span><span class="p">,</span><span class="s2">"goldenrod"</span><span class="p">,</span> <span class="s2">"purple"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">,</span>     
+          <span class="s2">"mediumspringgreen"</span><span class="p">,</span> <span class="s2">"black"</span><span class="p">,</span><span class="s2">"cyan"</span><span class="p">,</span><span class="s2">"deeppink"</span><span class="p">,</span> 
+          <span class="s2">"yellow"</span><span class="p">,</span><span class="s2">"pink"</span><span class="p">,</span> <span class="s2">"gold"</span><span class="p">,</span><span class="s2">"olive"</span><span class="p">,</span><span class="s2">"orchid"</span><span class="p">,</span><span class="s2">"tomato"</span><span class="p">,</span><span class="s2">"dodgerblue"</span><span class="p">,</span><span class="s2">"darkorange"</span> <span class="p">]</span>
+<span class="err">#</span> <span class="nx">setting</span> <span class="nx">colors</span> <span class="nx">manually</span> <span class="nx">and</span> <span class="nx">I</span> <span class="nx">chose</span> <span class="nx">minimal</span> <span class="nx">color</span> <span class="nx">palette</span> 
+
+
+<span class="nx">cat</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">area</span><span class="o">=</span><span class="p">[]</span>
+<span class="nx">category_employed</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">category_median</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">small_fig_bubble</span> <span class="o">=</span> <span class="nx">plt</span><span class="p">.</span><span class="nx">figure</span><span class="p">()</span>
+
+<span class="err">#</span><span class="s1">'for'</span> <span class="nx">loop</span> <span class="nx">to</span> <span class="nx">set</span> <span class="nx">the</span> <span class="nx">values</span> <span class="nx">of</span> <span class="nx">those</span> <span class="mi">16</span> <span class="nx">majors</span> <span class="nx">by</span> <span class="nx">taking</span> <span class="nx">the</span> <span class="nx">mean</span> <span class="nx">salaries</span><span class="p">,</span><span class="nx">totals</span> <span class="nx">etc</span>
+<span class="k">for</span> <span class="nx">category</span> <span class="k">in</span> <span class="nx">output_category</span><span class="err">:</span>       
+    <span class="nx">cat</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">category</span><span class="p">)</span>
+    <span class="nx">category_employed</span><span class="p">.</span><span class="nx">append</span><span class="p">((</span><span class="nx">np</span><span class="p">.</span><span class="nx">mean</span><span class="p">(</span><span class="nx">df</span><span class="p">[</span><span class="nx">df</span><span class="p">[</span><span class="s1">'Major_category'</span><span class="p">]</span> <span class="o">==</span> <span class="nx">category</span><span class="p">].</span><span class="nx">Employed</span><span class="p">)))</span>
+    <span class="nx">category_median</span><span class="p">.</span><span class="nx">append</span><span class="p">((</span><span class="nx">np</span><span class="p">.</span><span class="nx">mean</span><span class="p">(</span><span class="nx">df</span><span class="p">[</span><span class="nx">df</span><span class="p">[</span><span class="s1">'Major_category'</span><span class="p">]</span> <span class="o">==</span> <span class="nx">category</span><span class="p">].</span><span class="nx">Median</span><span class="p">)))</span>
+    <span class="nx">area</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="nx">sqrt</span><span class="p">((</span><span class="nx">np</span><span class="p">.</span><span class="nx">mean</span><span class="p">(</span><span class="nx">df</span><span class="p">[</span><span class="nx">df</span><span class="p">[</span><span class="s1">'Major_category'</span><span class="p">]</span> <span class="o">==</span> <span class="nx">category</span><span class="p">].</span><span class="nx">Total</span><span class="p">))))</span>  <span class="err">#</span><span class="nx">the</span> <span class="nx">area</span> <span class="nx">is</span> <span class="nx">magnified</span> <span class="nx">by</span> <span class="mi">6</span> <span class="nx">times</span> <span class="nx">to</span> <span class="nx">show</span> <span class="nx">a</span> <span class="nx">real</span> <span class="nx">sense</span> <span class="nx">of</span> <span class="nx">area</span><span class="p">.</span>
+
+<span class="k">for</span> <span class="nx">vals</span> <span class="k">in</span> <span class="nx">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="err">:</span>
+    <span class="nx">text</span><span class="p">(</span><span class="nx">category_employed</span><span class="p">[</span><span class="nx">vals</span><span class="p">],</span> <span class="nx">category_median</span><span class="p">[</span><span class="nx">vals</span><span class="p">],</span> <span class="nx">cat</span><span class="p">[</span><span class="nx">vals</span><span class="p">],</span> <span class="nx">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>  <span class="err">#</span><span class="nx">infusing</span> <span class="nx">the</span> <span class="nx">lables</span> <span class="nx">into</span> <span class="nx">the</span> <span class="mi">16</span> <span class="nx">categories</span>
+
+    
+<span class="nx">scatter</span><span class="p">(</span><span class="nx">category_employed</span><span class="p">,</span><span class="nx">category_median</span><span class="p">,</span><span class="nx">c</span><span class="o">=</span><span class="nx">colour</span><span class="p">,</span><span class="nx">s</span><span class="o">=</span><span class="nx">area</span><span class="p">,</span><span class="nx">linewidths</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="nx">edgecolor</span><span class="o">=</span><span class="s1">'w'</span><span class="p">,</span><span class="nx">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="nx">plt</span><span class="p">.</span><span class="nx">xlabel</span><span class="p">(</span><span class="s1">'Number of Employed Students'</span><span class="p">)</span>
+<span class="nx">plt</span><span class="p">.</span><span class="nx">ylabel</span><span class="p">(</span><span class="s1">'Median salary'</span><span class="p">)</span>
+<span class="nx">plt</span><span class="p">.</span><span class="nx">ylim</span><span class="p">([</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">80000</span><span class="p">])</span>
+<span class="nx">plt</span><span class="p">.</span><span class="nx">xlim</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">660000</span><span class="p">])</span>
+<span class="nx">show</span><span class="p">()</span>                     <span class="err">#</span> <span class="nx">we</span> <span class="nx">get</span> <span class="nx">a</span> <span class="nx">clearer</span> <span class="nx">picture</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">story</span> <span class="nx">by</span> <span class="nx">categorizing</span> <span class="nx">the</span> <span class="nx">data</span> <span class="nx">points</span></code></pre></figure>
+
+<p><img src="../static/img/blog/college/3.png" border="5" alt="Responsive image" /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">cufflinks</span> <span class="kn">as</span> <span class="nn">cf</span>
+<span class="n">cf</span><span class="o">.</span><span class="n">set_config_file</span><span class="p">(</span><span class="n">offline</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">world_readable</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">theme</span><span class="o">=</span><span class="s">'pearl'</span><span class="p">)</span>
+<span class="n">py</span><span class="o">.</span><span class="n">iplot_mpl</span><span class="p">(</span><span class="n">small_fig_bubble</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">'s6_bubble-chart'</span><span class="p">)</span>       
+<span class="c"># again we want to use plot.ly to give a pritty image of the above visualization</span>
+<span class="c"># but this time around the colors have been chosen and set by us! </span></code></pre></figure>
+
+<iframe width="804" height="470" frameborder="0" scrolling="no" src="https://plot.ly/~sandyorbit/2.embed"></iframe>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Diceyness of Visual Perception</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//steve.html" />
+  <id>http://santhosh114.github.io//steve</id>
+  <published>2015-10-08T00:00:00Z</published>
+  <updated>2015-10-08T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>.container {
+  width: auto;
+  max-width: 800px;
+  text-align: center;
+
+}
+</style>
+
+<p><img src="../static/img/blog/steve/main.png" alt="Test Image" style="width:680px;height:450px;" /></p>
+
+<blockquote>
+  <p>This is an extract from I590: Data Visualization course discussions at <a href="https://www.indiana.edu">Indiana University, Bloomington</a>, Instructor: <a href="http://yongyeol.com">Yong Yeol Ahn</a>.</p>
+</blockquote>
+
+<h3 id="overview"><a href="">Overview:</a></h3>
+<p>Information Visualization is a marriage of multiple disciplines such as Psychology, Human Computer Interaction and Data Science, which again includes Computer Science, and Statistics! So they’re many reasons to be intrigued by its sheer depth and this post quickly gives a glimpse of Psychological aspect of Information Visualization.</p>
+
+<p>In terms of our visual apparatus, we’re not as good at judging differences in certain parameters and NOT good at some and Stevens’ Power Law gives us a quick way to measure this phenomenon.</p>
+
+<h3 id="stevens-power-law"><a href="">Stevens’ Power Law:</a></h3>
+<p>The general form of the law is</p>
+
+<script type="math/tex; mode=display">\psi(I) = kI^a,</script>
+
+<p>where \( I \) is the magnitude of the physical stimulus, \( \psi(I) \) is the subjective magnitude of the sensation evoked by the stimulus, \( a \) is an exponent that depends on the type of stimulation and \( k \) is a proportionality constant that depends on the units used.</p>
+<div class="divider"></div>
+
+<p><img src="../static/img/blog/steve/steve.png" alt="Test Image" style="width:438px;height:450px;" /></p>
+<p><a href="http://d.hatena.ne.jp/keiono/20110324/1301049705">Image Source</a></p>
+
+<p>Charting this out gives us an interesting array of stimulus and from the below image one can generalize the stimulus exaggeration that happens with the responses below the line (Length n=1.0) namely area, loudness and brightness. This means the change in these parameters (area, loudness and brightness) is in some way underestimated by the human perception and the reverse is true for the upper side of the line. This is why we give careful consideration while designing an infographic with colors and their brightness. <a href="http://www.santhoshfiddle.com/post3.html">My case-study on choropleth maps</a></p>
+
+<h3 id="example-length-vs-area"><a href="">Example: Length vs Area</a></h3>
+<p>From Stevens’ Power Law we can immediately conclude that we’re not as good at judging differences area as we are in length. We use length as a means to judge sizes and therefore tend to underestimate differences in areas especially of the circles.</p>
+<p><img src="../static/img/blog/steve/comp.png" alt="Test Image" style="width:640px;height:266px;" /></p>
+
+<p>For this reason, a circle that actually has 3x the area of another appears comparable because our brain is relating their radii, which differ by a factor of 1.72x.</p>
+
+<p><img src="../static/img/blog/steve/circle.png" alt="Test Image" style="width:600px;height:350px;" /></p>
+<p>The above comparison is from <a href="http://vis.stanford.edu/files/2010-MTurk-CHI.pdf">Crowdsourcing Graphical Perception: Using Mechanical Turk to Assess Visualization Design</a> by Jeffrey Heer and Michael Bostock.</p>
+
+<div class="divider"></div>
+
+<p>And an interesting ordering of these visual elements for general use is listed <a href="http://hci.stanford.edu/courses/cs448b/w09/lectures/20090126-Perception.pdf">here</a> by Jeffrey Heer @Stanford HCI Group lectures.</p>
+<p><img src="../static/img/blog/steve/heer.png" alt="Test Image" style="width:700px;height:490px;" /></p>
+
+<div class="divider"></div>
+
+<h3 id="pie"><a href="">Pie:</a></h3>
+<p>This is one reason why one of the most overused pie charts are getting dicey at a point where you wants to really visualize information in a precise way.</p>
+
+<p><img src="../static/img/blog/steve/pie.png" alt="Test Image" style="width:500px;height:480px;" /></p>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">My Critique on Precinct-Level Choropleth Map</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//critique.html" />
+  <id>http://santhosh114.github.io//critique</id>
+  <published>2015-09-05T00:00:00Z</published>
+  <updated>2015-09-05T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>.container {
+  width: auto;
+  max-width: 800px;
+  text-align: center;
+
+}
+</style>
+
+<p><img src="../static/img/blog/critique/main.png" alt="Test Image" style="width:704px;height:427px;" /></p>
+
+<blockquote>
+  <p>This is my critique on the article titled <a href="http://www.nytimes.com/interactive/2014/11/04/upshot/senate-maps.html?_r=0">“The Most Detailed Maps You’ll See From the Midterm Elections”</a>
+ @nytimes/upshot</p>
+</blockquote>
+
+<div class="divider"></div>
+
+<h3 id="infograph-overview"><a href="">Infograph Overview:</a></h3>
+
+<p>This visualization is a precinct-level choropleth map of election results from the midterm elections. The objective of the visualization is to show a fine-grained analysis of how the Republicans and Democrats are spread along with the population density, measured by the graduated color scale.</p>
+
+<p>A precinct is one of the part into which a town or city is divided in order to organize elections, as reported by the article- “there were more than 175,000 precincts in the United States in 2012, fifty times the number of counties”.</p>
+
+<p>So this demonstrates the sheer efficacy of the precinct-level data and how effectively one can draw insights when the data is much finer. Now the county level analysis of polling results gives a clearer picture of how the data spread within the county. Hence, this visualization for me appears to have the potential to convey actionable insights.</p>
+
+<div class="divider"></div>
+
+<h3 id="visualization-technique"><a href="">Visualization Technique:</a></h3>
+
+<p>This is a geo-location based map visualization technique called choropleth map and it uses a coloring scheme inside defined areas on a map in order to show value levels and indicate the average values of some property or quantity in those areas.</p>
+
+<div class="divider"></div>
+
+<h3 id="how-it-works"><a href="">How it works:</a></h3>
+
+<p>The basic design is to represent Democratic in blue and Republican in red with various hue levels based on the population density within the precincts. Much needed zoom functionality is provided with dynamic county-level labeling in the first layer and precinct-level labeling in the further zoom levels.</p>
+
+<ul>
+  <li>Key insights described as a result of detected patterns at different areas/regions.</li>
+  <li>Overall percentage split-up shown state wide per candidate.</li>
+  <li>Compare and contrasts population based on its metadata like candidate origin, racial attributes etc.</li>
+  <li>Population density as hue variation augmented with party specific colors.</li>
+  <li>MouseOver shows the candidate information and total number of votes.</li>
+  <li>Minimal design with the insights described in the form of plain text.</li>
+  <li>Every visualization technique has it own pros and cons in terms of how well it depicts the data. This is an excellent example of geo-data-visualization with optimal usage of design, color and area breakdown. The following are the few points summarizing this.</li>
+</ul>
+
+<div class="divider"></div>
+
+<h3 id="design-mileage"><a href="">Design Mileage:</a></h3>
+
+<p>The precinct-level data clearly adds a lot of detail and outlines distinct clusters.
+Helpful for finding intriguing relationships between two or more geographic location based on the nature of the population.
+Give an idea of how each area compares with other in terms of number and spread of votes.</p>
+
+<div class="divider"></div>
+
+<h3 id="data-sources"><a href="">Data Sources:</a></h3>
+
+<p>State wise polling data is sourced from the corresponding state’s Board of Elections, therefore the probe for data integrity will be simply out of question, at least from where I stand. 
+Streets data by OpenStreetMap contributers.</p>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">Interactive Choropleth Map - US</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//chloro.html" />
+  <id>http://santhosh114.github.io//chloro</id>
+  <published>2015-08-11T00:00:00Z</published>
+  <updated>2015-08-11T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>
+  .state{
+    fill: none;
+    stroke: #99cd0d;
+    stroke-width: 1;
+  }
+  .state:hover{
+    fill-opacity:0.5;
+  }
+  #tooltip {   
+    position: absolute;           
+    text-align: center;
+    padding: 20px;             
+    margin: 10px;
+    font: 12px sans-serif;        
+    background: lightsteelblue;   
+    border: 1px;      
+    border-radius: 2px;           
+    pointer-events: none;         
+  }
+  #tooltip h4{
+    margin:0;
+    font-size:14px;
+  }
+  #tooltip{
+    background:rgba(0,0,0,0.9);
+    border:1px solid grey;
+    border-radius:5px;
+    font-size:12px;
+    width:auto;
+    padding:4px;
+    color:white;
+    opacity:0;
+  }
+  #tooltip table{
+    table-layout:fixed;
+  }
+  #tooltip tr td{
+    padding:0;
+    margin:0;
+  }
+  #tooltip tr td:nth-child(1){
+    width:50px;
+  }
+  #tooltip tr td:nth-child(2){
+    text-align:center;
+  }
+
+</style>
+
+<style>.container {
+  width: auto;
+  max-width: 1060px;
+  text-align: center;
+
+}
+</style>
+
+<div id="tooltip"></div>
+<!-- div to hold tooltip. -->
+<div class="myNote">
+<svg width="1000" height="650" id="statesvg"></svg> <!-- svg to hold the map. -->
+<script src="../static/js/uStates.js"></script> <!-- creates uStates. -->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+  function tooltipHtml(n, d){ /* function to create html content string in tooltip div. */
+    return "<h4>"+n+"</h4><table>"+
+      "<tr><td>Low</td><td>"+(d.low)+"</td></tr>"+
+      "<tr><td>Average</td><td>"+(d.avg)+"</td></tr>"+
+      "<tr><td>High</td><td>"+(d.high)+"</td></tr>"+
+      "</table>";
+  }
+  
+  var sampleData ={}; /* Sample random data. */ 
+  ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+  "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
+  "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
+  "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+  "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
+    .forEach(function(d){ 
+      var low=Math.round(100*Math.random()), 
+        mid=Math.round(100*Math.random()), 
+        high=Math.round(100*Math.random());
+      sampleData[d]={low:d3.min([low,mid,high]), high:d3.max([low,mid,high]), 
+          avg:Math.round((low+mid+high)/3), color:d3.interpolate("#e9ff6f", "#037b7f")(low/100)}; 
+    });
+  
+  /* draw states on id #statesvg */ 
+  choropleth.draw("#statesvg", sampleData, tooltipHtml);
+</script>
+</div>
+
+<div class="divider"></div>
+
+<h3 id="infographic-overview"><a href="">Infographic Overview:</a></h3>
+
+<p>This is a Choropleth map of US based on Math.random data(you would notice the data changing for every page refresh) is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map, such as population density or per-capita income.</p>
+
+<p>It is interactive in nature by showing some simple stats!</p>
+
+<h3 id="data"><a href="">Data:</a></h3>
+<p>The primary data is applied over the area of the mapped regions by means of Color!</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Color interpolated between the variables(low, mid, high).</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span> 
+      <span class="kd">var</span> <span class="nx">low</span><span class="o">=</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()),</span> 
+          <span class="nx">mid</span><span class="o">=</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()),</span> 
+          <span class="nx">high</span><span class="o">=</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
+          <span class="nx">sampleData</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="na">low</span><span class="p">:</span><span class="nx">d3</span><span class="p">.</span><span class="nx">min</span><span class="p">([</span><span class="nx">low</span><span class="p">,</span><span class="nx">mid</span><span class="p">,</span><span class="nx">high</span><span class="p">]),</span> <span class="na">high</span><span class="p">:</span><span class="nx">d3</span><span class="p">.</span><span class="nx">max</span><span class="p">([</span><span class="nx">low</span><span class="p">,</span><span class="nx">mid</span><span class="p">,</span><span class="nx">high</span><span class="p">]),</span> 
+          <span class="na">avg</span><span class="p">:</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">((</span><span class="nx">low</span><span class="o">+</span><span class="nx">mid</span><span class="o">+</span><span class="nx">high</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="na">color</span><span class="p">:</span><span class="nx">d3</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">(</span><span class="s2">"#e9ff6f"</span><span class="p">,</span> <span class="s2">"#037b7f"</span><span class="p">)(</span><span class="nx">low</span><span class="o">/</span><span class="mi">100</span><span class="p">)};</span> 
+    <span class="p">}</span></code></pre></figure>
+
+ ]]></content>
+</entry>
+
+
+  <entry>
+  <title type="text">A simple Interactive Streamgraph</title>
+  <link rel="alternate" type="text/html" href="http://santhosh114.github.io//stream.html" />
+  <id>http://santhosh114.github.io//stream</id>
+  <published>2015-07-13T00:00:00Z</published>
+  <updated>2015-07-13T00:00:00Z</updated>
+  <content type="html"><![CDATA[ <style>
+ button {
+  position: relative;
+  left: 610px;
+  top: 10px;
+}
+
+</style>
+
+<script src="//d3js.org/d3.v3.min.js"></script>
+
+<div id="Stream">
+  <button onclick="transition()">Update Stream Graph</button>
+</div>
+<script>
+
+var n = 20, // number of layers
+    m = 200, // number of samples per layer
+    stack = d3.layout.stack().offset("wiggle"),
+    layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
+    layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
+
+var width = 800,
+    height = 450;
+
+var x = d3.scale.linear()
+    .domain([0, m - 1])
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .domain([0, d3.max(layers0.concat(layers1), function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); })])
+    .range([height, 0]);
+
+var color = d3.scale.linear()
+    .range(["Green", "White"]);
+
+  // var  color = d3.scale.category20();
+
+var area = d3.svg.area()
+    .x(function(d) { return x(d.x); })
+    .y0(function(d) { return y(d.y0); })
+    .y1(function(d) { return y(d.y0 + d.y); });
+
+var svg = d3.select("#Stream").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.selectAll("path")
+    .data(layers0)
+  .enter().append("path")
+    .attr("d", area)
+    .style("fill", function() { return color(Math.random()); });
+
+function transition() {
+  d3.selectAll("path")
+      .data(function() {
+        var d = layers1;
+        layers1 = layers0;
+        return layers0 = d;
+      })
+    .transition()
+      .duration(2500)
+      .attr("d", area);
+}
+
+// Inspired by Lee Byron's test data generator.
+function bumpLayer(n) {
+
+  function bump(a) {
+    var x = 1 / (.1 + Math.random()),
+        y = 2 * Math.random() - .5,
+        z = 10 / (.1 + Math.random());
+    for (var i = 0; i < n; i++) {
+      var w = (i / n - y) * z;
+      a[i] += x * Math.exp(-w * w);
+    }
+  }
+
+  var a = [], i;
+  for (i = 0; i < n; ++i) a[i] = 0;
+  for (i = 0; i < 5; ++i) bump(a);
+  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+}
+
+</script>
+
+<div class="divider">
+
+<!-- https://bl.ocks.org/mbostock/4060954 -->
+</div>
+
+<h3 id="data"><a href="">Data:</a></h3>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Inspired by Lee Byron's test data generator.</span>
+<span class="kd">function</span> <span class="nx">bumpLayer</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="kd">function</span> <span class="nx">bump</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(.</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()),</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="p">.</span><span class="mi">5</span><span class="p">,</span>
+        <span class="nx">z</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="p">(.</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">());</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="o">/</span> <span class="nx">n</span> <span class="o">-</span> <span class="nx">y</span><span class="p">)</span> <span class="o">*</span> <span class="nx">z</span><span class="p">;</span>
+      <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">x</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="o">-</span><span class="nx">w</span> <span class="o">*</span> <span class="nx">w</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="nx">bump</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="nx">i</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">d</span><span class="p">)};</span> <span class="p">});</span>
+<span class="p">}</span></code></pre></figure>
+
+ ]]></content>
+</entry>
+
+
+
+</feed>

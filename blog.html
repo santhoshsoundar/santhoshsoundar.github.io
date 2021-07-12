@@ -1,0 +1,41 @@
+---
+layout: layout
+title: Blog
+
+---
+<style>.container {
+  width: auto;
+  max-width: 800px;
+  text-align: center;
+
+}
+</style>
+<div class="container">
+<h3>Archive</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+		{% for post in site.posts %}
+			<div class="row blog_post">
+				 <div class="col-sm-4 col-md-4 col-lg-4">
+					 <h5 class="post_date">
+					 	{{ post.date | date: "%B %e, %Y" }}
+					 </h5>
+				 </div>
+				 <div class="col-sm-8 col-md-8 col-lg-8 post_title">
+					 <h5 style="text-align: right">
+					 	<strong><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></strong>
+					 </h5>  
+				 </div>
+				 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                           {{ post.img }}
+                 </div>
+				<div class="col-sm-12 tags">
+				{{ post.mytags }}
+				</div>
+                                                   				 
+			</div>
+	    {% endfor %}
+	</div>
+  </div>
+</div>
